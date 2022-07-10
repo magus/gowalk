@@ -43,4 +43,10 @@ expo run:ios
 #
 # seems like we might need to upgrade Xcode which requires updated OSX to 12 ...
 # going to do that...
+
+# looks like we will want to follow this guide for setting up custom native code
+# it first has us use expo run:ios like above to build the project
+# then it guides us through using expo-dev-client (to go back to fast JS fast refresh workflow)
+# and then finally using eas build to create builds that run on devices
+# https://docs.expo.dev/workflow/customizing/
 ```
