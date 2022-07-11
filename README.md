@@ -3,10 +3,14 @@ messing with apple healthkit to simulate walking
 
 # plan
 
+- promisify `AppleHealthKit.initHealthKit` and `AppleHealthKit.saveSteps`
+- follow https://docs.expo.dev/workflow/customizing/ to finish setting up dev flow
+
 - background tasks are out (not easily possible)
 - instead we will capture a start time and store in a local db
 - render a timer that shows distance walked
 - periodically (when app is open) write out steps / healthkit activity
+
 
 # setup
 
@@ -55,4 +59,8 @@ expo run:ios
 # then it guides us through using expo-dev-client (to go back to fast JS fast refresh workflow)
 # and then finally using eas build to create builds that run on devices
 # https://docs.expo.dev/workflow/customizing/
+
+expo run:ios
+# 🎉 working!!
+# all good after updating to macOS 12.4 & Xcode 13.4.1
 ```
