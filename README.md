@@ -11,6 +11,13 @@ messing with apple healthkit to simulate walking
 - render a timer that shows distance walked
 - periodically (when app is open) write out steps / healthkit activity
 
+- app user flow
+  - open app, select egg, adjust distance if necessary (e.g. 2.3/10km)
+  - backwards calculate time to walk remaining distance i.e. ~7.7km
+  - create timer displaying walk progress, animated bar or something
+  - setup a future notification to alert phone/user when finished walking
+  - while app is active, periodically log walking activity in 1-10 min intervals or something
+
 
 # setup
 
