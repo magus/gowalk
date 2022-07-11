@@ -1,16 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import AppleHealthKit, {
-  HealthValue,
-  HealthKitPermissions,
-} from "react-native-health";
+import AppleHealthKit from "react-native-health";
 
 /* Permission options */
 const permissions = {
   permissions: {
     read: [],
-    write: [AppleHealthKit.Constants.Permissions.Steps],
+    write: [
+      AppleHealthKit.Constants.Permissions.Steps,
+      AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
+    ],
   },
 };
 
@@ -38,9 +38,69 @@ export default function App() {
         <TouchableOpacity onPress={logSteps}>
           <Text>logSteps</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={logDistance}>
+          <Text>logDistance</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={logRunning}>
+          <Text>logRunning</Text>
+        </TouchableOpacity>
       </View>
     </React.Fragment>
   );
+}
+
+function logDistance() {
+  let startMs = new Date(2022, 6, 10, 1, 30, 0).getTime();
+
+  const endMs = startMs + 1000 * 60 * 5;
+  const endDate = new Date(endMs).toISOString();
+  const startDate = new Date(startMs).toISOString();
+  const value = 1;
+  const unit = AppleHealthKit.Constants.Units.mile;
+
+  AppleHealthKit.saveWalkingRunningDistance(
+    { value, unit, startDate, endDate },
+    (err, results) => {
+      if (err) {
+        console.error("AppleHealthKit.saveDistance", { err, results });
+        throw err;
+      }
+
+      console.debug("AppleHealthKit.saveDistance", { results });
+    }
+  );
+}
+
+function logRunning() {
+  let startMs = new Date(2022, 6, 10, 1, 30, 0).getTime();
+
+  for (let i = 0; i < 10; i++) {
+    const endMs = startMs + 1000 * 60 * 5;
+    const endDate = new Date(endMs).toISOString();
+    const startDate = new Date(startMs).toISOString();
+    startMs = endMs;
+
+    let options = {
+      type: AppleHealthKit.Constants.Activities.Running, // See HealthActivity Enum
+      startDate,
+      endDate,
+      energyBurned: 50, // In Energy burned unit,
+      energyBurnedUnit: "calorie",
+      distance: 50, // In Distance unit
+      distanceUnit: "meter",
+    };
+
+    AppleHealthKit.saveWorkout(options, (err, results) => {
+      if (err) {
+        console.error("AppleHealthKit.saveWorkout", { err, results });
+        throw err;
+      }
+
+      console.debug("AppleHealthKit.saveWorkout", { results });
+    });
+  }
 }
 
 function logSteps() {
@@ -50,11 +110,11 @@ function logSteps() {
 
   AppleHealthKit.saveSteps({ value, startDate, endDate }, (err, results) => {
     if (err) {
-      console.error("logSteps", { err, results });
+      console.error("AppleHealthKit.saveSteps", { err, results });
       throw err;
     }
 
-    console.debug("logSteps", { results });
+    console.debug("AppleHealthKit.saveSteps", { results });
   });
 }
 
