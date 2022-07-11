@@ -1,6 +1,12 @@
 # gowalk
 messing with apple healthkit to simulate walking
 
+# plan
+
+- background tasks are out (not easily possible)
+- instead we will capture a start time and store in a local db
+- render a timer that shows distance walked
+- periodically (when app is open) write out steps / healthkit activity
 
 # setup
 
