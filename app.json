@@ -19,7 +19,8 @@
     ],
     "jsEngine": "hermes",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.magus.gowalk"
     },
     "android": {
       "adaptiveIcon": {

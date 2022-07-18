@@ -7,8 +7,22 @@ import React from 'react';
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import AppleHealthKit from 'react-native-health';
 import Animated, { useSharedValue, withSpring, useAnimatedStyle } from 'react-native-reanimated';
+import * as MMKV from 'react-native-mmkv';
 
-/* Permission options */
+const storage = new MMKV.MMKV();
+
+const KEYS = Object.freeze({
+  EggList: 'EggList',
+});
+
+storage.set(KEYS.EggList, JSON.stringify([]));
+
+interface Egg {
+  id: string;
+  meters: number;
+}
+
+/* react-native-health options */
 const permissions = {
   permissions: {
     read: [],
@@ -30,6 +44,14 @@ export default function App() {
     });
   }, []);
 
+  const [eggList, set_eggList] = MMKV.useMMKVObject<Egg[]>(KEYS.EggList);
+
+  function handleSetEggList() {
+    set_eggList([{ id: 'abc123', meters: 10_000 }]);
+  }
+
+  console.debug({ eggList });
+
   // reanimated animatiosn are slick
   // https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/shared-values
   const animation = useSharedValue(0);
@@ -50,6 +72,8 @@ export default function App() {
 
       <View style={styles.container}>
         <Text>gowalk</Text>
+
+        <Button title="Set Egg list" onPress={handleSetEggList} />
 
         <Button title="Random animation!" onPress={randomize_animation} />
         <Animated.View style={[animation_style, styles.animated_view]} />
