@@ -30,7 +30,7 @@ When a build is created with a release channel it means we can target it with up
 ## preview
 
 ```
-expo publish --release-channel preview-v1
+yarn update preview-v1
 ```
 
 
