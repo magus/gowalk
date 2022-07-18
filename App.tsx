@@ -126,16 +126,15 @@ export default function App() {
 function logDistance() {
   const now = new Date().getTime();
 
-  const startMs = now - 1000 * 60 * 30;
-  const endMs = startMs + 1000 * 60 * 5;
+  const startMs = now - 1000 * 30;
+  const endMs = startMs + 1000 * 30;
 
   const endDate = new Date(endMs).toISOString();
   const startDate = new Date(startMs).toISOString();
 
-  const value = 1;
-  const unit = AppleHealthKit.Constants.Units.mile;
+  const value = 100;
 
-  AppleHealthKit.saveWalkingRunningDistance({ value, unit, startDate, endDate }, (err, results) => {
+  AppleHealthKit.saveWalkingRunningDistance({ value, startDate, endDate }, (err, results) => {
     if (err) {
       console.error('AppleHealthKit.saveDistance', { err, results });
       throw err;
