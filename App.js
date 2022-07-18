@@ -1,3 +1,7 @@
+// improve error messages in dev builds
+// https://docs.expo.dev/development/getting-started/
+import "expo-dev-client";
+
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";

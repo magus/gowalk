@@ -4,7 +4,6 @@ messing with apple healthkit to simulate walking
 # plan
 
 - promisify `AppleHealthKit.initHealthKit` and `AppleHealthKit.saveSteps`
-- follow https://docs.expo.dev/workflow/customizing/ to finish setting up dev flow
 
 - background tasks are out (not easily possible)
 - instead we will capture a start time and store in a local db
@@ -77,3 +76,69 @@ expo run:ios
 # 🎉 working!!
 # all good after updating to macOS 12.4 & Xcode 13.4.1
 ```
+
+settings up eas build
+> https://docs.expo.dev/development/build/
+
+```sh
+yarn global add eas-cli
+eas build:configure
+
+# prompted for a login, logged in with existing expo account
+# created an eas.json file
+
+# added `"developmentClient": true,` under `build.development` in `eas.json`
+# according to docs settings this will create a Debug build, which allows the
+# expo-dev-client library to allow you to choose the update to load in your app
+# and provide tools to help you developthis enables for development builds
+
+# now running below command to setup for ios builds
+eas device:create
+
+# prompts for my apple developer account credentials (probably doing what match does)
+# generated qr code to url that goes through setup instructions on devices
+# added uuids of a few personal devices
+
+# build command to create a build for internal distribution
+eas build --profile development --platform ios
+
+# ah ok so it stops me here and prompts me to install `expo-dev-client` nice
+# was wondering when that would come into play
+```
+
+> Starting with `expo-dev-client` on a new expo project
+> https://docs.expo.dev/development/installation/
+> Manually adding `expo-dev-client` to existing project
+> https://docs.expo.dev/development/getting-started/
+
+```sh
+expo install expo-dev-client
+```
+
+Adding import to top of `App.js` for better error messages
+
+```js
+import 'expo-dev-client';
+```
+
+... and the instructions loop back and have us run the command below
+which should not be good to proceed since we installed `expo-dev-client`
+
+```sh
+eas build --profile development --platform ios
+
+# cli is really good, prompting through various setup options
+# selecting devices (uuids registered earlier)
+# setting up push notifications (creating push keys)
+```
+
+Build finished and installedo on phone but requires a development server.
+Okay that makes sense this is a development build it didn't ship with a JS bundle it relies on a server just like when we run locally.
+Going to run the command below to spin up a dev client server and see if I can connect the build on the iOS device to my local machine
+
+```sh
+yarn start
+```
+
+🎉 It worked! Scanning QR code on iOS device opened in the development app on device
+Pretty smooth developer experience, nice.
