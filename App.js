@@ -4,8 +4,14 @@ import "expo-dev-client";
 
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AppleHealthKit from "react-native-health";
+import Animated, {
+  useSharedValue,
+  withSpring,
+  useAnimatedStyle,
+  Easing,
+} from "react-native-reanimated";
 
 /* Permission options */
 const permissions = {
@@ -32,12 +38,29 @@ export default function App() {
     });
   }, []);
 
+  // reanimated animatiosn are slick
+  // https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/shared-values
+  const animation = useSharedValue(0);
+  function randomize_animation() {
+    const sign = Math.random() < 0.5 ? -1 : +1;
+    const value = sign * Math.random();
+    animation.value = withSpring(value);
+  }
+  const animation_style = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: 90 * animation.value }],
+    };
+  });
+
   return (
     <React.Fragment>
       <StatusBar style="auto" />
 
       <View style={styles.container}>
         <Text>gowalk</Text>
+
+        <Button title="Random animation!" onPress={randomize_animation} />
+        <Animated.View style={[animation_style, styles.animated_view]} />
 
         <TouchableOpacity onPress={logSteps}>
           <Text>logSteps</Text>
@@ -128,5 +151,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  animated_view: {
+    width: 180,
+    height: 90,
+    backgroundColor: "orange",
   },
 });

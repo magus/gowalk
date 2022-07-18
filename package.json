@@ -17,6 +17,7 @@
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
     "react-native-health": "magus/react-native-health#dev/noah/fitness-saveWalkingRunningDistance",
+    "react-native-reanimated": "~2.8.0",
     "react-native-web": "0.17.7"
   },
   "devDependencies": {
