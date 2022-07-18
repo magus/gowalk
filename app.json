@@ -24,7 +24,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.apple.health.C92C0CF3-CD33-45F7-AAF6-5933B2E3AEB0"
+      "bundleIdentifier": "com.nike.health.C92C0CF3-CD33-45F7-AAF6-5933B2E3AEB0"
     },
     "android": {
       "adaptiveIcon": {
