@@ -35,7 +35,7 @@ interface Egg {
 /* react-native-health options */
 const permissions = {
   permissions: {
-    read: [],
+    read: [AppleHealthKit.Constants.Permissions.DistanceWalkingRunning, AppleHealthKit.Constants.Permissions.Steps],
     write: [AppleHealthKit.Constants.Permissions.Steps, AppleHealthKit.Constants.Permissions.DistanceWalkingRunning],
   },
 };
@@ -107,12 +107,77 @@ export default function App() {
         <Button title="Random animation!" onPress={randomize_animation} />
         <Animated.View style={[animation_style, styles.animated_view]} />
 
+        <Button title="getSamples" onPress={getSamples} />
+
+        <Button title="simulateRun" onPress={simulateRun} />
+
         <Button title="logSteps" onPress={logSteps} />
 
         <Button title="logDistance" onPress={logDistance} />
       </View>
     </SafeAreaView>
   );
+}
+
+function getSamples() {
+  const now = new Date().getTime();
+  const seconds = 60 * 30;
+  const startMs = now - 1000 * seconds;
+  const endMs = startMs + 1000 * seconds;
+  const endDate = new Date(endMs).toISOString();
+  const startDate = new Date(startMs).toISOString();
+
+  let options = {
+    startDate,
+    endDate,
+    // one of: ['Walking', 'StairClimbing', 'Running', 'Cycling', 'Workout']
+    type: AppleHealthKit.Constants.Observers.Walking,
+  };
+
+  AppleHealthKit.getSamples(options, (err: Object, results: Array<Object>) => {
+    if (err) {
+      console.error('AppleHealthKit.getSamples', { err, results });
+      throw err;
+    }
+
+    console.debug('AppleHealthKit.getSamples', { results });
+  });
+}
+
+function simulateRun() {
+  const now = new Date().getTime();
+
+  const seconds = 60;
+  const startMs = now - 1000 * seconds;
+  const endMs = startMs + 1000 * seconds;
+
+  const endDate = new Date(endMs).toISOString();
+  const startDate = new Date(startMs).toISOString();
+
+  const meters_per_sec = 6 + Math.random() * 1.5;
+  const distance_meters = meters_per_sec * seconds;
+  const steps_per_meter = 0.7 + Math.random();
+  const steps = Math.floor(steps_per_meter * distance_meters);
+
+  console.debug({ meters_per_sec, distance_meters, steps_per_meter, steps });
+
+  AppleHealthKit.saveWalkingRunningDistance({ value: distance_meters, startDate, endDate }, (err, results) => {
+    if (err) {
+      console.error('AppleHealthKit.saveDistance', { err, results });
+      throw err;
+    }
+
+    console.debug('AppleHealthKit.saveDistance', { results });
+  });
+
+  AppleHealthKit.saveSteps({ value: steps, startDate, endDate }, (err, results) => {
+    if (err) {
+      console.error('AppleHealthKit.saveSteps', { err, results });
+      throw err;
+    }
+
+    console.debug('AppleHealthKit.saveSteps', { results });
+  });
 }
 
 function logDistance() {

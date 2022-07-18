@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>gowalk</string>
+    <string>noah-iphone-13-pro</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -25,7 +25,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.magus.gowalk</string>
+          <string>com.apple.health.C92C0CF3-CD33-45F7-AAF6-5933B2E3AEB0</string>
         </array>
       </dict>
     </array>
