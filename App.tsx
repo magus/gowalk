@@ -1,26 +1,18 @@
 // improve error messages in dev builds
 // https://docs.expo.dev/development/getting-started/
-import "expo-dev-client";
+import 'expo-dev-client';
 
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import AppleHealthKit from "react-native-health";
-import Animated, {
-  useSharedValue,
-  withSpring,
-  useAnimatedStyle,
-  Easing,
-} from "react-native-reanimated";
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import AppleHealthKit from 'react-native-health';
+import Animated, { useSharedValue, withSpring, useAnimatedStyle } from 'react-native-reanimated';
 
 /* Permission options */
 const permissions = {
   permissions: {
     read: [],
-    write: [
-      AppleHealthKit.Constants.Permissions.Steps,
-      AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
-    ],
+    write: [AppleHealthKit.Constants.Permissions.Steps, AppleHealthKit.Constants.Permissions.DistanceWalkingRunning],
   },
 };
 
@@ -28,7 +20,7 @@ export default function App() {
   React.useEffect(() => {
     AppleHealthKit.initHealthKit(permissions, (err) => {
       /* Called after we receive a response from the system */
-      console.debug("AppleHealthKit.initHealthKit", { err, permissions });
+      console.debug('AppleHealthKit.initHealthKit', { err, permissions });
 
       if (err) {
         throw err;
@@ -87,17 +79,14 @@ function logDistance() {
   const value = 1;
   const unit = AppleHealthKit.Constants.Units.mile;
 
-  AppleHealthKit.saveWalkingRunningDistance(
-    { value, unit, startDate, endDate },
-    (err, results) => {
-      if (err) {
-        console.error("AppleHealthKit.saveDistance", { err, results });
-        throw err;
-      }
-
-      console.debug("AppleHealthKit.saveDistance", { results });
+  AppleHealthKit.saveWalkingRunningDistance({ value, unit, startDate, endDate }, (err, results) => {
+    if (err) {
+      console.error('AppleHealthKit.saveDistance', { err, results });
+      throw err;
     }
-  );
+
+    console.debug('AppleHealthKit.saveDistance', { results });
+  });
 }
 
 function logRunning() {
@@ -114,18 +103,18 @@ function logRunning() {
       startDate,
       endDate,
       energyBurned: 50, // In Energy burned unit,
-      energyBurnedUnit: "calorie",
+      energyBurnedUnit: 'calorie',
       distance: 50, // In Distance unit
-      distanceUnit: "meter",
+      distanceUnit: 'meter',
     };
 
     AppleHealthKit.saveWorkout(options, (err, results) => {
       if (err) {
-        console.error("AppleHealthKit.saveWorkout", { err, results });
+        console.error('AppleHealthKit.saveWorkout', { err, results });
         throw err;
       }
 
-      console.debug("AppleHealthKit.saveWorkout", { results });
+      console.debug('AppleHealthKit.saveWorkout', { results });
     });
   }
 }
@@ -137,25 +126,25 @@ function logSteps() {
 
   AppleHealthKit.saveSteps({ value, startDate, endDate }, (err, results) => {
     if (err) {
-      console.error("AppleHealthKit.saveSteps", { err, results });
+      console.error('AppleHealthKit.saveSteps', { err, results });
       throw err;
     }
 
-    console.debug("AppleHealthKit.saveSteps", { results });
+    console.debug('AppleHealthKit.saveSteps', { results });
   });
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   animated_view: {
     width: 180,
     height: 90,
-    backgroundColor: "orange",
+    backgroundColor: 'orange',
   },
 });
