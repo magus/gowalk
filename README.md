@@ -1,7 +1,13 @@
+# **ABANDONED**
+
 # gowalk
 messing with apple healthkit to simulate walking
 
+
 # plan
+
+- **ABANDONED** Pokemon Go Adventure Sync seems to look at `sourceId` to ensure it only logs data recorded by apps with a `com.apple.health` bundle identifier.
+This effectively kills any chance of emulating health kit data to be read by Pokemon Go Adventure Sync
 
 - promisify `AppleHealthKit.initHealthKit` and `AppleHealthKit.saveSteps`
 
