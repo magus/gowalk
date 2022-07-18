@@ -3,20 +3,23 @@
     "version": ">= 0.55.1"
   },
   "build": {
+    "production": {
+      "releaseChannel": "production-v1"
+    },
+    "preview": {
+      "extends": "production",
+      "releaseChannel": "preview-v1",
+      "distribution": "internal"
+    },
     "development": {
+      "extends": "production",
+      "releaseChannel": "development-v1",
       "developmentClient": true,
       "distribution": "internal",
-      "android": {
-        "gradleCommand": ":app:assembleDebug"
-      },
       "ios": {
         "buildConfiguration": "Debug"
       }
-    },
-    "adhoc": {
-      "distribution": "internal"
-    },
-    "production": {}
+    }
   },
   "submit": {
     "production": {}

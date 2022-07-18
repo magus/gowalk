@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build:js": "expo export",
+    "build:preview": "eas build --profile preview --platform ios",
+    "build:dev": "eas build --profile development --platform ios",
+    "build:prod": "eas build --profile production --platform ios",
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",

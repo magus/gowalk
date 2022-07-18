@@ -18,20 +18,59 @@ messing with apple healthkit to simulate walking
   - while app is active, periodically log walking activity in 1-10 min intervals or something
 
 
+# updating
+
+> You can push updates to your app by publishing to the `prod-v1` release channel. The standalone app will update with the most recent compatible version of your app on the `prod-v1` release channel.
+> If you have a new version that you don't want v1 users getting, release v2 of your app by running `expo publish --release-channel prod-v2`, setting the `releaseChannel` in your prod build profile to `prod-v2`, and building again with `eas build --platform ios --profile prod`. Only users with the `prod-v2` ipa will pull releases from that release channel.
+> https://docs.expo.dev/distribution/release-channels/
+
+If we update native libraries or assets we should increment the release channel in the respective build.
+When a build is created with a release channel it means we can target it with updates specifically for that version.
+
+## preview
+
+```
+expo publish --release-channel preview-v1
+```
+
+
 # building
 
-adhoc build
+## js
+
+useful for making sure javascript bundle can be built without going through longer full build process below
+for example, this will fail early on invalid syntax such as `10_000` numeric separators etc. which are
+valid typescript but are not valid javascript
 
 ```
-eas build --profile adhoc --platform ios
+yarn build:js
 ```
 
-development build
+## preview
+
+adhoc / pre-production / beta build for registered devices
 
 ```
-eas build --profile development --platform ios
+yarn build:preview
 ```
-# development
+
+## production
+
+build which can be submitted to app stores
+
+```
+yarn build:prod
+```
+
+## development
+
+debug build that can be used to test on real devices, useful to test things such as
+notifications, device sensors, etc.
+
+```
+yarn build:dev
+```
+# local development
 
 ```
 yarn ios
