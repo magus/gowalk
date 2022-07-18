@@ -19,6 +19,12 @@ messing with apple healthkit to simulate walking
   - while app is active, periodically log walking activity in 1-10 min intervals or something
 
 
+# development
+
+```
+yarn ios
+```
+
 # setup
 
 ```zsh
