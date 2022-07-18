@@ -54,6 +54,10 @@ export default function App() {
     });
   }, []);
 
+  React.useEffect(() => {
+    registerNotificationPermissions();
+  }, []);
+
   const [eggList, set_eggList] = MMKV.useMMKVObject<Egg[]>(KEYS.EggList);
 
   function handleSetEggList() {
@@ -201,3 +205,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
   },
 });
+
+// https://docs.expo.dev/versions/v45.0.0/sdk/notifications/#api
+async function registerNotificationPermissions() {
+  const { status: existingStatus } = await Notifications.getPermissionsAsync();
+  let finalStatus = existingStatus;
+
+  if (existingStatus !== 'granted') {
+    const { status } = await Notifications.requestPermissionsAsync();
+    finalStatus = status;
+  }
+
+  if (finalStatus !== 'granted') {
+    alert('Failed to get push token for push notification!');
+    return;
+  }
+}
