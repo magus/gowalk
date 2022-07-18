@@ -17,9 +17,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "jsEngine": "hermes",
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.magus.gowalk"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
