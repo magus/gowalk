@@ -27,6 +27,9 @@ messing with apple healthkit to simulate walking
 If we update native libraries or assets we should increment the release channel in the respective build.
 When a build is created with a release channel it means we can target it with updates specifically for that version.
 
+**IMPORTANT**: Unfortunately the app must be force quit and re-opened multiple times to trigger an update using `expo`.
+Might be worth considering using `code-push` instead.
+
 ## preview
 
 ```
