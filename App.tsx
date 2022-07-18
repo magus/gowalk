@@ -57,7 +57,7 @@ export default function App() {
   const [eggList, set_eggList] = MMKV.useMMKVObject<Egg[]>(KEYS.EggList);
 
   function handleSetEggList() {
-    set_eggList([{ id: 'abc123', meters: 10_000 }]);
+    set_eggList([{ id: 'abc123', meters: 10 * 1000 }]);
   }
 
   console.debug({ eggList });
