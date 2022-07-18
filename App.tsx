@@ -124,11 +124,14 @@ export default function App() {
 }
 
 function logDistance() {
-  let startMs = new Date(2022, 6, 10, 1, 30, 0).getTime();
+  const now = new Date().getTime();
 
+  const startMs = now - 1000 * 60 * 30;
   const endMs = startMs + 1000 * 60 * 5;
+
   const endDate = new Date(endMs).toISOString();
   const startDate = new Date(startMs).toISOString();
+
   const value = 1;
   const unit = AppleHealthKit.Constants.Units.mile;
 
