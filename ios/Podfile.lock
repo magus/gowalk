@@ -14,6 +14,8 @@ PODS:
   - EXJSONUtils (0.3.0)
   - EXManifests (0.3.0):
     - EXJSONUtils
+  - EXNotifications (0.15.4):
+    - ExpoModulesCore
   - Expo (45.0.6):
     - ExpoModulesCore
   - expo-dev-client (1.0.1):
@@ -426,6 +428,7 @@ DEPENDENCIES:
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
   - EXManifests (from `../node_modules/expo-manifests/ios`)
+  - EXNotifications (from `../node_modules/expo-notifications/ios`)
   - Expo (from `../node_modules/expo/ios`)
   - expo-dev-client (from `../node_modules/expo-dev-client/ios`)
   - expo-dev-launcher (from `../node_modules/expo-dev-launcher`)
@@ -495,6 +498,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-json-utils/ios"
   EXManifests:
     :path: "../node_modules/expo-manifests/ios"
+  EXNotifications:
+    :path: "../node_modules/expo-notifications/ios"
   Expo:
     :path: "../node_modules/expo/ios"
   expo-dev-client:
@@ -588,6 +593,7 @@ SPEC CHECKSUMS:
   EXFont: 04235cc22e6fef86028feb67db452978dc6f240f
   EXJSONUtils: 2a74b8f40f1523cc3f92af99c91aa78201737a77
   EXManifests: 0c6134b7b6f3236a93a778c3f44ba1cfb3f9fa3d
+  EXNotifications: 297bb555bbd26fd7aa8ff3bf7e724d4d65f7e895
   Expo: 3df4af520db4f37f9821ba732ce9ac0dc67bb7b8
   expo-dev-client: 56e713e8ab330e3d2522e4d1c568dc1f5e0116b1
   expo-dev-launcher: 3c6059a3f2cc3093a2a22d23e57cb54bcba5b33f

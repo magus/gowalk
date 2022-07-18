@@ -4,10 +4,20 @@ import 'expo-dev-client';
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import AppleHealthKit from 'react-native-health';
 import Animated, { useSharedValue, withSpring, useAnimatedStyle } from 'react-native-reanimated';
 import * as MMKV from 'react-native-mmkv';
+import * as Notifications from 'expo-notifications';
+
+// set the handler that will cause the notification to show the alert
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 const storage = new MMKV.MMKV();
 
@@ -66,12 +76,27 @@ export default function App() {
     };
   });
 
+  async function handleNotify() {
+    const title = 'Notification title';
+    const body = 'Notification body';
+    const seconds = 5;
+
+    const id = await Notifications.scheduleNotificationAsync({
+      content: { title, body },
+      trigger: { seconds },
+    });
+
+    console.debug('handleNotify', { id });
+  }
+
   return (
-    <React.Fragment>
+    <SafeAreaView style={styles.root}>
       <StatusBar style="auto" />
 
       <View style={styles.container}>
         <Text>gowalk</Text>
+
+        <Button title="Notify in 5 seconds" onPress={handleNotify} />
 
         <Button title="Set Egg list" onPress={handleSetEggList} />
 
@@ -90,7 +115,7 @@ export default function App() {
           <Text>logRunning</Text>
         </TouchableOpacity>
       </View>
-    </React.Fragment>
+    </SafeAreaView>
   );
 }
 
@@ -159,6 +184,10 @@ function logSteps() {
 }
 
 const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+
   container: {
     flex: 1,
     backgroundColor: '#fff',

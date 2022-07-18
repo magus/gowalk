@@ -3,6 +3,14 @@
     "name": "gowalk",
     "slug": "gowalk",
     "version": "1.0.0",
+    "jsEngine": "hermes",
+    "plugins": [
+      "react-native-health",
+      "expo-notifications"
+    ],
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,13 +19,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
-    "jsEngine": "hermes",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.magus.gowalk"
@@ -30,9 +34,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "react-native-health"
-    ]
+    }
   }
 }
